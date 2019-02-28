@@ -1,6 +1,11 @@
 <?php
+session_start();
+
 include('functions.php');
 // 入力チェック
+
+chk_ssid();
+kanri_ssid();
 
 if(
     !isset($_POST['name']) || $_POST['name']==''||

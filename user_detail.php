@@ -1,8 +1,20 @@
 <?php
+// セッションのスタート
+session_start();
+
 // 関数ファイルの読み込み
 include('functions.php');
 
+// ログイン状態のチェック
+chk_ssid();
+// kanri_ssid();
+
+$menu1 = menu1();
+
 // getで送信されたidを取得
+if (!isset($_GET['id'])) {
+    exit("Error");
+}
 $id = $_GET['id'];
 
 //DB接続します
@@ -56,12 +68,7 @@ if ($status==false) {
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="user_index.php">ユーザー登録</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="user_select.php">ユーザー一覧</a>
-                    </li>
+                    <?=$menu1?>
                 </ul>
             </div>
         </nav>

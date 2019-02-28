@@ -1,19 +1,3 @@
-<?php
-// セッションのスタート
-session_start();
-
-// 関数ファイルの読み込み
-include('functions.php');
-
-// ログイン状態のチェック
-chk_ssid();
-// kanri_ssid();
-
-$menu1 = menu1();
-
-?>
-
-
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -21,7 +5,7 @@ $menu1 = menu1();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>ログイン管理</title>
+    <title>ログイン</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <style>
         div{
@@ -35,40 +19,31 @@ $menu1 = menu1();
 
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">ユーザー登録</a>
+            <a class="navbar-brand" href="#">LogIn</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                   <?=$menu1?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index_nologin.php">ユーザー登録</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="select_nologin.php">BOOKMARK一覧</a>
+                    </li>
                 </ul>
             </div>
         </nav>
     </header>
 
-    <form action="user_insert.php" method="post">
+    <form method="post" action="login_act.php">
         <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" class="form-control" id="name" name="name">
-        </div>
-        <div class="form-group">
-            <label for="lid">ログインID</label>
+            <label for="lid">LoginID</label>
             <input type="text" class="form-control" id="lid" name="lid">
         </div>
         <div class="form-group">
-            <label for="lpw">パスワード</label>
+            <label for="lpw">Pass</label>
             <input type="password" class="form-control" id="lpw" name="lpw">
-        </div>
-        <div class="form-group">
-            <label for="kanri_flg">管理フラグ</label>
-            <input type="radio" value=0 id="kanri_flg" name="kanri_flg">:一般
-            <input type="radio" value=1 id="kanri_flg" name="kanri_flg">:管理者
-        </div>
-        <div class="form-group">
-            <label for="life_flg">アクティブフラグ</label>
-            <input type="radio" value=0 id="life_flg" name="life_flg">:アクティブ
-            <input type="radio" value=1 id="life_flg" name="life_flg">:非アクティブ
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-primary">Submit</button>

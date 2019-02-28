@@ -1,14 +1,11 @@
 <?php
-// セッションのスタート
 session_start();
-
 // 関数ファイルの読み込み
 include('functions.php');
+// 入力チェック
 
-// ログイン状態のチェック
 chk_ssid();
-
-$menu = menu();
+kanri_ssid();
 
 
 // getで送信されたidを取得
@@ -64,13 +61,27 @@ if ($status==false) {
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                    <?=$menu?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="kanri_detail.php">BOOKMARK登録</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="kanri_select.php">BOOKMARK一覧</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="user_index.php">ユーザー登録</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="user_select.php">ユーザー一覧</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="logout.php">ログアウト</a>
+                    </li>
                 </ul>
             </div>
         </nav>
     </header>
 
-    <form method="post" action="update.php">
+    <form method="post" action="kanri_update.php">
         <div class="form-group">
             <label for="name">Name</label>
             <!-- 受け取った値をvaluesに埋め込もう -->

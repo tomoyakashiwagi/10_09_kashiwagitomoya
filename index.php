@@ -1,3 +1,15 @@
+<?php
+// セッションのスタート
+session_start();
+
+//0.外部ファイル読み込み
+include('functions.php');
+
+// ログイン状態のチェック
+chk_ssid();
+
+$menu = menu();
+?>
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -25,12 +37,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.php">データ登録</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="select.php">データ一覧</a>
-                    </li>
+                   <?=$menu?>
                 </ul>
             </div>
         </nav>

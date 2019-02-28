@@ -16,18 +16,9 @@ $url = $_POST['url'];
 $comment = $_POST['comment'];
 $indate = $_POST['indate'];
 
+//DB接続
 $pdo = db_conn();
 
-//DB接続
-// $dbn = 'mysql:dbname=gs_f02_db09;charset=utf8;port=3306;host=localhost';
-// $user = 'root';
-// $pwd = 'root';
-
-// try {
-//     $pdo = new PDO($dbn, $user, $pwd);
-// } catch (PDOException $e) {
-//     exit('dbError:'.$e->getMessage());
-// }
 
 //データ登録SQL作成
 $sql ='INSERT INTO gs_bm_table(id,name,url,comment,indate)

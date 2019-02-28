@@ -1,16 +1,14 @@
 <?php
+session_start();
+
 include('functions.php');
+
+chk_ssid();
+
+$menu = menu();
+
 //1. DB接続
 $pdo = db_conn();
-// $dbn = 'mysql:dbname=gs_f02_db09;charset=utf8;port=3306;host=localhost';
-// $user = 'root';
-// $pwd = 'root';
-
-// try {
-//     $pdo = new PDO($dbn, $user, $pwd);
-// } catch (PDOException $e) {
-//     exit('dbError:'.$e->getMessage());
-// }
 
 //2. データ表示SQL作成
 $sql = 'SELECT * FROM gs_bm_table ORDER BY indate ASC';
@@ -64,15 +62,13 @@ if ($status==false) {
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">BookMark</a>
+            <a class="navbar-brand" href="#">BOOKMARK一覧</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.php">データ登録</a>
-                    </li>
+                   <?=$menu?>
                 </ul>
             </div>
         </nav>

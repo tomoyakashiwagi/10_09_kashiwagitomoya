@@ -7,7 +7,7 @@ include('functions.php');
 
 // ログイン状態のチェック
 chk_ssid();
-kanri_ssid();
+// kanri_ssid();
 
 $menu1 = menu1();
 
@@ -15,20 +15,8 @@ $menu1 = menu1();
 //1. DB接続
 $pdo = db_conn();
 
-
-
-// $dbn = 'mysql:dbname=gs_f02_db09;charset=utf8;port=3306;host=localhost';
-// $user = 'root';
-// $pwd = 'root';
-
-// try {
-//     $pdo = new PDO($dbn, $user, $pwd);
-// } catch (PDOException $e) {
-//     exit('dbError:'.$e->getMessage());
-// }
-
 //2. データ表示SQL作成
-$sql = 'SELECT * FROM user_table ORDER BY id ASC';
+$sql = 'SELECT * FROM gs_bm_table ORDER BY indate ASC';
 $stmt = $pdo->prepare($sql);
 $status = $stmt->execute();
 
@@ -46,12 +34,11 @@ if ($status==false) {
         $view .= '<li class="list-group-item">';
         $view .= '<p>'.$result['id'].'</p>';
         $view .= '<p>'.$result['name'].'</p>';
-        $view .= '<p>'.$result['lid'].'</p>';
-        $view .= '<p>'.$result['lpw'].'</p>';
-        $view .= '<p>'.$result['kanri_flg'].'</p>';
-        $view .= '<p>'.$result['life_flg'].'</p>';
-        $view .= '<a href="user_detail.php?id='.$result[id].'" class="badge badge-primary">Edit</a>'; 
-        $view .= '<a href="user_delete.php?id='.$result[id].'" class="badge badge-danger">Delete</a>';
+        $view .= '<p>'.$result['indate'].'</p>';
+        $view .= '<p>'.$result['comment'].'</p>';
+        $view .= '<p>'.$result['url'].'</p>';
+        $view .= '<a href="kanri_detail.php?id='.$result[id].'" class="badge badge-primary">Edit</a>'; 
+        $view .= '<a href="kanri_delete.php?id='.$result[id].'" class="badge badge-danger">Delete</a>';
         $view .= '<?li>';
         
     }
@@ -67,7 +54,7 @@ if ($status==false) {
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ユーザー管理</title>
+    <title>BOOKMARKリスト表示</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <style>
         div {
@@ -80,13 +67,13 @@ if ($status==false) {
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">ユーザー管理</a>
+            <a class="navbar-brand" href="#">BOOKMARK一覧</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                    <?=$menu1?>
+                   <?=$menu1?>
                 </ul>
             </div>
         </nav>
