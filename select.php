@@ -32,6 +32,8 @@ if ($status==false) {
         $view .= '<p>'.$result['indate'].'</p>';
         $view .= '<p>'.$result['comment'].'</p>';
         $view .= '<p>'.$result['url'].'</p>';
+        // imgタグで出力しよう！
+        $view .= '<img src="'.$result['image'].'" alt="" height="150px">'.'</p>';
         $view .= '<a href="detail.php?id='.$result[id].'" class="badge badge-primary">Edit</a>'; 
         $view .= '<a href="delete.php?id='.$result[id].'" class="badge badge-danger">Delete</a>';
         $view .= '<?li>';

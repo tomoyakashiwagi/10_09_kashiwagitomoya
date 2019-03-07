@@ -4,8 +4,8 @@
 // DB接続関数（PDO）
 function db_conn()
 {
-    $dbname = 'gs_f02_db09';
-    $db = 'mysql:dbname='.$dbname.';charset=utf8;port=3306;host=localhost';
+    // $dbname = 'gs_f02_db09';
+    $db = 'mysql:dbname=gs_f02_db09;charset=utf8;port=3306;host=localhost';
     $user = 'root';
     $pwd = 'root';
     try {
@@ -63,3 +63,8 @@ function menu1()
 }
 //$menu=menu();これを各ページに変数で代入
 //＜？=menu？＞を各ページのHTMLにぶっ込む。
+
+function h($str)
+{
+    return htmlspecialchars($str, ENT_QUOTES, 'UTF-8');
+}

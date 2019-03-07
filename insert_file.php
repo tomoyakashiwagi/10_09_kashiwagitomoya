@@ -1,25 +1,20 @@
 <?php
-// 関数ファイル読み込み
 include('functions.php');
+// 入力チェック
 
-
-//入力チェック(受信確認処理追加)
-if (
-    !isset($_POST['name']) || $_POST['name']=='' ||
-    !isset($_POST['url']) || $_POST['url']=='' ||
+if(
+    !isset($_POST['name']) || $_POST['name']==''||
+    !isset($_POST['url']) || $_POST['url']==''||
     !isset($_POST['comment']) || $_POST['comment']==''
-) {
-    exit('ParamError');
+){
+exit('ParamError');
 }
 
 //POSTデータ取得
-$id = $_POST['id'];
 $name = $_POST['name'];
 $url = $_POST['url'];
 $comment = $_POST['comment'];
-// $image = $_POST['upfile'];
-
-
+$indate = $_POST['indate'];
 
 // Fileアップロードチェック
 if (isset($_FILES['upfile']) && $_FILES['upfile']['error'] ==0) {
@@ -49,24 +44,31 @@ if (isset($_FILES['upfile']) && $_FILES['upfile']['error'] ==0) {
     exit('画像が送信されていません');
 }
 
-//DB接続します(エラー処理追加)
-$pdo  = db_conn();
+
+
+
+//DB接続
+$pdo = db_conn();
+
 
 //データ登録SQL作成
-$sql = 'UPDATE gs_bm_table SET name=:a1, url=:a2, comment=:a3, image=:image WHERE id=:id';
+$sql ='INSERT INTO gs_bm_table(id,name,url,comment, image, indate)
+VALUE(NULL,:a1,:a2,:a3, :image, sysdate())';
+
 $stmt = $pdo->prepare($sql);
-$stmt->bindValue(':a1', $name, PDO::PARAM_STR);
-$stmt->bindValue(':a2', $url, PDO::PARAM_STR);
-$stmt->bindValue(':a3', $comment, PDO::PARAM_STR);
+$stmt->bindValue(':a1', $name, PDO::PARAM_STR);    //Integer（数値の場合 PDO::PARAM_INT)
+$stmt->bindValue(':a2', $url, PDO::PARAM_STR);   //Integer（数値の場合 PDO::PARAM_INT)
+$stmt->bindValue(':a3', $comment, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
 // :imageを$file_nameで追加！
 $stmt->bindValue(':image', $file_name, PDO::PARAM_STR);
-$stmt->bindValue(':id', $id, PDO::PARAM_INT);
 $status = $stmt->execute();
 
-//4．データ登録処理後
+//４．データ登録処理後
 if ($status==false) {
-    errorMsg($stmt);
+    //SQL実行時にエラーがある場合（エラーオブジェクト取得して表示）
+    $error = $stmt->errorInfo();
+    exit('sqlError:'.$error[2]);
 } else {
-    header('Location: select.php');
-    exit;
+    //５．index.phpへリダイレクト
+    header('Location: index.php');
 }

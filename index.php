@@ -43,7 +43,7 @@ $menu = menu();
         </nav>
     </header>
 
-    <form action="insert.php" method="post">
+    <form method="post" action="insert_file.php" enctype="multipart/form-data">
         <div class="form-group">
             <label for="task">Name</label>
             <input type="text" class="form-control" id="name" name="name">
@@ -55,6 +55,11 @@ $menu = menu();
         <div class="form-group">
             <label for="task">URL</label>
             <input type="text" class="form-control" id="url" name="url">
+        </div>
+        <div class="form-group">
+            <label for="upfile">Image</label>
+            <!-- inputを追加 -->
+            <input type="file" class="form-control-file" id="upfile" name="upfile">
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-primary">Submit</button>

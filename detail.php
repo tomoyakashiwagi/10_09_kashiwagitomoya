@@ -34,6 +34,30 @@ if ($status==false) {
     // $rsは配列で返ってくる．$rs["id"], $rs["task"]などで値をとれる
     // var_dump()で見てみよう
 }
+
+
+// $view='';
+// if ($status==false) {
+//     //execute（SQL実行時にエラーがある場合）
+//     $error = $stmt->errorInfo();
+//     exit('sqlError:'.$error[2]); //失敗はエラー表示する
+// } else {
+//     //Selectデータの数だけ自動でループしてくれる
+//     //http://php.net/manual/ja/pdostatement.fetch.php
+//     //while=全レコードを順番に取得 $resultに配列で格納。
+//     while ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
+//         $view .= '<li class="list-group-item">';
+//         $view .= '<p>'.$result['id'].'</p>';
+//         $view .= '<p>'.$result['name'].'</p>';
+//         $view .= '<p>'.$result['indate'].'</p>';
+//         $view .= '<p>'.$result['comment'].'</p>';
+//         $view .= '<p>'.$result['url'].'</p>';
+//         // imgタグで出力しよう！
+//         $view .= '<img src="'.$result['image'].'" alt="" height="150px">'.'</p>';
+//         $view .= '<?li>';
+        
+//     }
+// }
 ?>
 
 
@@ -69,8 +93,7 @@ if ($status==false) {
             </div>
         </nav>
     </header>
-
-    <form method="post" action="update.php">
+    <form method="post" action="update.php" enctype="multipart/form-data">
         <div class="form-group">
             <label for="name">Name</label>
             <!-- 受け取った値をvaluesに埋め込もう -->
@@ -85,6 +108,12 @@ if ($status==false) {
             <label for="url">URL</label>
             <!-- 受け取った値をvaluesに埋め込もう -->
             <input type="text" class="form-control" id="url" name="url" value="<?=$rs['url']?>">
+        </div>
+        <img src="<?=$rs['image']?>" alt="" height="150px">
+        <div class="form-group">
+            <label for="upfile">Image</label>
+        <!--inputを追加 -->
+            <input type="file" class="form-control-file" accept="image/*" capture="camera" id="upfile" name="upfile">
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-primary">Submit</button>
